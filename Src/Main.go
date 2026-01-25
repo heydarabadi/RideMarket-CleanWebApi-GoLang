@@ -1,0 +1,4 @@
+package Src
+
+func Main() {
+}

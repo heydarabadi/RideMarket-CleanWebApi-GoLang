@@ -1,0 +1,28 @@
+# فایل‌های باینری
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# فایل خروجی برنامه
+/bin/
+/out/
+
+# پوشه vendor (در صورت استفاده از ماژول‌ها)
+/vendor/
+
+# فایل‌های کش و لاگ IDE
+*.log
+*.tmp
+*.swp
+.DS_Store
+.idea/
+*.vscode/
+
+# ماژول‌ها و پکیج‌های کش شده
+/go.sum
+/go.mod
+
+# پوشه‌ی test cache
+/testdata/
