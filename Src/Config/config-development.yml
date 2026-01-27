@@ -1,5 +1,5 @@
 ﻿Server:
-  Port: 5005
+  Port: 1234
   RunMode: debug
 
 Logger:

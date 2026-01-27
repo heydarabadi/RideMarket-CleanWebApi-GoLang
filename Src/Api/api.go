@@ -19,7 +19,7 @@ func InitServer() {
 		Routers.Health(health)
 	}
 
-	err := r.Run(fmt.Sprint(cfg.Server.Port))
+	err := r.Run(fmt.Sprintf(":%s", cfg.Server.Port))
 	if err != nil {
 		return
 	}
