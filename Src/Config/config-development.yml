@@ -1,0 +1,28 @@
+﻿Server:
+  Port: 5005
+  RunMode: debug
+
+Logger:
+  FilePath: ../logs/logs.log
+  Encoding: json
+  Level: debug
+
+Cors:
+  AllowOrigins: "*"
+
+Postgres:
+  Host: localhost
+  Port: 5432
+  User: postgres
+  Password: admin
+  DbName: RideMarketDb
+  SslMode: false
+
+Redis:
+  Host: localhost
+  Port: 6379
+  Password: password
+  db: 0
+  MinIdleConnections: 100
+  PoolSize: 5000
+  PoolTimeOut: 240
