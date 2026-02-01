@@ -21,8 +21,18 @@ Postgres:
 Redis:
   Host: redis_container
   Port: 6379
+  Db: 0
   Password: password
-  db: 0
-  MinIdleConnections: 100
-  PoolSize: 5000
-  PoolTimeOut: 240
+  PoolSize: 10
+  PoolTimeOut: 15
+  ReadTimeOut: 5
+  WriteTimeOut: 5
+  DialTimeOut: 5
+  IdleCheckFrequency: 500
+Password:
+  IncludeChars: true
+  IncludeDigits: true
+  MinLength: 6
+  MaxLength: 64
+  IncludeUpperCase: true
+  IncludeLowerCase: true

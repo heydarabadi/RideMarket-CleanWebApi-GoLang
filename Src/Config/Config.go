@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/spf13/viper"
 )
@@ -44,10 +45,13 @@ type RedisConfig struct {
 	Host               string
 	Port               int
 	Password           string
-	db                 int
-	MinIdleConnections int
+	Db                 int
+	ReadTimeOut        time.Duration
 	PoolSize           int
-	PoolTimeOut        int
+	PoolTimeOut        time.Duration
+	WriteTimeOut       time.Duration
+	DialTimeOut        time.Duration
+	IdleCheckFrequency time.Duration
 }
 
 func GetConfig() *Config {
