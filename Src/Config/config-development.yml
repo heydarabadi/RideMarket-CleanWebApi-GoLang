@@ -16,7 +16,10 @@ Postgres:
   User: postgres
   Password: admin
   DbName: RideMarketDb
-  SslMode: false
+  SslMode: disable
+  ConnMaxIdleTime: 10
+  MaxOpenConns: 100
+  ConnMaxLifetime: 30
 
 Redis:
   Host: localhost

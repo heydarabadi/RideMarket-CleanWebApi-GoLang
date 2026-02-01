@@ -33,12 +33,15 @@ type CorsConfig struct {
 }
 
 type PostgresConfig struct {
-	Host     string
-	Port     int
-	User     string
-	Password string
-	DbName   string
-	SslMode  bool
+	Host            string
+	Port            int
+	User            string
+	Password        string
+	DbName          string
+	SslMode         string
+	ConnMaxIdleTime time.Duration
+	MaxOpenConns    int
+	ConnMaxLifetime time.Duration
 }
 
 type RedisConfig struct {
@@ -103,8 +106,8 @@ func getConfigPath(env string) string {
 	} else if strings.ToLower(env) == "production" {
 		return "config/config-production"
 	} else if strings.ToLower(env) == "development" {
-		return "config/config-development"
+		return "../config/config-development"
 	} else {
-		return "config/config-development"
+		return "../config/config-development"
 	}
 }

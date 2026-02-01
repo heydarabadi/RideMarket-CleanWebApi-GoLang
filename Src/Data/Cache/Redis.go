@@ -2,6 +2,7 @@ package Cache
 
 import (
 	"RideMarket-CleanWebApi-GoLang/Config"
+	"context"
 	"fmt"
 	"time"
 
@@ -10,7 +11,7 @@ import (
 
 var redisClient *redis.Client
 
-func InitRedis(cfg *Config.Config) {
+func InitRedis(cfg *Config.Config, ctx context.Context) error {
 	redisConfig := cfg.Redis
 	redisClient = redis.NewClient(&redis.Options{
 		ReadTimeout:  redisConfig.ReadTimeOut * time.Second,
@@ -22,6 +23,12 @@ func InitRedis(cfg *Config.Config) {
 		PoolSize:     redisConfig.PoolSize,
 		PoolTimeout:  redisConfig.PoolTimeOut * time.Second,
 	})
+
+	_, err := redisClient.Ping(ctx).Result()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func GetRedisInstance() *redis.Client {
