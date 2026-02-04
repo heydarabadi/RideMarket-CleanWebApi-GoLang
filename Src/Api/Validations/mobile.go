@@ -11,5 +11,5 @@ func IranianMobileNumberValidator(field validator.FieldLevel) bool {
 	if !ok {
 		return false
 	}
-	return Common.IranianMobileNumberValidator(value)
+	return Common.IranianMobileNumberValidator(value, logger)
 }

@@ -20,6 +20,7 @@ func InitServer(cfg *Config.Config) {
 	r := gin.New()
 	r.Use(Middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.Recovery())
+	r.Use(Middlewares.DefaultStructuredLogger(cfg))
 
 	RegisterRoute(r)
 	err := r.Run(fmt.Sprintf(":%s", cfg.Server.Port))

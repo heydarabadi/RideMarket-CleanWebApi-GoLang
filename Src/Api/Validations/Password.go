@@ -2,10 +2,13 @@ package Validations
 
 import (
 	"RideMarket-CleanWebApi-GoLang/Common"
-	"log"
+	"RideMarket-CleanWebApi-GoLang/Config"
+	"RideMarket-CleanWebApi-GoLang/pkg/Logging/Log"
 
 	"github.com/go-playground/validator/v10"
 )
+
+var logger = Log.NewLogger(Config.GetConfig())
 
 func PasswordValidator(fld validator.FieldLevel) bool {
 	value, ok := fld.Field().Interface().(string)
@@ -16,7 +19,7 @@ func PasswordValidator(fld validator.FieldLevel) bool {
 
 	err := Common.ValidatePassword(value)
 	if err != nil {
-		log.Print(err.Error())
+		logger.Warning(Log.Validation, Log.MobileValidation, err.Error(), nil)
 		return false
 	}
 	return true

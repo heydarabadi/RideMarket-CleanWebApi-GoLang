@@ -5,33 +5,29 @@ import (
 	"RideMarket-CleanWebApi-GoLang/Config"
 	"RideMarket-CleanWebApi-GoLang/Data/Cache"
 	"RideMarket-CleanWebApi-GoLang/Data/Database"
+	"RideMarket-CleanWebApi-GoLang/pkg/Logging/Log"
 	"context"
-	"log"
 	"time"
 )
 
 func main() {
-	if err := run(); err != nil {
-		log.Fatal(err)
-	}
-}
+	cfg := Config.GetConfig()
 
-func run() error {
+	logger := Log.NewLogger(cfg)
+
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
-	cfg := Config.GetConfig()
-
 	if err := Cache.InitRedis(cfg, ctx); err != nil {
-		return err
+		logger.Fatal(Log.Redis, Log.Startup, err.Error(), nil)
 	}
 	defer Cache.CloseRedis()
 
 	if err := Database.InitDb(cfg); err != nil {
-		return err
+		logger.Fatal(Log.Postgres, Log.Startup, err.Error(), nil)
+
 	}
 	defer Database.CloseDb()
 
 	Api.InitServer(cfg)
-	return nil
 }

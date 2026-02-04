@@ -11,11 +11,11 @@ Cors:
   AllowOrigins: "*"
 
 Postgres:
-  Host: postgres_container
+  Host: localhost
   Port: 5432
   User: postgres
   Password: admin
-  DbName: RideMarketDb
+  DbName: car_sale_db
   SslMode: disable
   ConnMaxIdleTime: 10
   MaxOpenConns: 100

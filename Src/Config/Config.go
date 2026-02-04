@@ -15,6 +15,7 @@ type Config struct {
 	Cors     CorsConfig
 	Postgres PostgresConfig
 	Redis    RedisConfig
+	Logger   LoggerConfig
 }
 
 type ServerConfig struct {
