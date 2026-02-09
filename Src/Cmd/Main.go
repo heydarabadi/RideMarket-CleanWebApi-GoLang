@@ -4,7 +4,7 @@ import (
 	"RideMarket-CleanWebApi-GoLang/Api"
 	"RideMarket-CleanWebApi-GoLang/Config"
 	"RideMarket-CleanWebApi-GoLang/Data/Cache"
-	"RideMarket-CleanWebApi-GoLang/Data/Database"
+	"RideMarket-CleanWebApi-GoLang/Data/Database/DatabaseConfig"
 	"RideMarket-CleanWebApi-GoLang/pkg/Logging/Log"
 	"context"
 	"time"
@@ -23,11 +23,11 @@ func main() {
 	}
 	defer Cache.CloseRedis()
 
-	if err := Database.InitDb(cfg); err != nil {
+	if err := DatabaseConfig.InitDb(cfg); err != nil {
 		logger.Fatal(Log.Postgres, Log.Startup, err.Error(), nil)
 
 	}
-	defer Database.CloseDb()
+	defer DatabaseConfig.CloseDb()
 
 	Api.InitServer(cfg)
 }

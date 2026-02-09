@@ -20,11 +20,12 @@ const (
 	ExternalService SubCategory = "ExternalService"
 
 	// Postgres
-	Select  SubCategory = "Select"
-	Rolback SubCategory = "Rollback"
-	Update  SubCategory = "Update"
-	Delete  SubCategory = "Delete"
-	Insert  SubCategory = "Insert"
+	Select    SubCategory = "Select"
+	Rolback   SubCategory = "Rollback"
+	Update    SubCategory = "Update"
+	Delete    SubCategory = "Delete"
+	Insert    SubCategory = "Insert"
+	Migration SubCategory = "Migration"
 
 	// Internal
 	Api                 SubCategory = "Api"
