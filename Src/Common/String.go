@@ -1,8 +1,10 @@
 package Common
 
 import (
+	"RideMarket-CleanWebApi-GoLang/Config"
 	"crypto/rand"
 	"errors"
+	"fmt"
 	"math/big"
 	"unicode"
 )
@@ -113,4 +115,27 @@ func GeneratePassword(length int, includeSpecial bool) (string, error) {
 	password := string(b)
 
 	return password, nil
+}
+
+func GenerateOtp() string {
+	cfg := Config.GetConfig()
+	if cfg.Otp.Digits < 4 || cfg.Otp.Digits > 10 {
+		panic("تعداد ارقام OTP باید بین ۴ تا ۱۰ باشد")
+	}
+
+	min := new(big.Int).Exp(big.NewInt(10), big.NewInt(int64(cfg.Otp.Digits-1)), nil)
+	max := new(big.Int).Exp(big.NewInt(10), big.NewInt(int64(cfg.Otp.Digits)), nil)
+	max.Sub(max, big.NewInt(1))
+
+	rangeSize := new(big.Int).Sub(max, min)
+	rangeSize.Add(rangeSize, big.NewInt(1))
+
+	n, err := rand.Int(rand.Reader, rangeSize)
+	if err != nil {
+		panic(err)
+	}
+
+	result := new(big.Int).Add(n, min)
+
+	return fmt.Sprintf("%0*d", cfg.Otp.Digits, result)
 }

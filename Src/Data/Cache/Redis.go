@@ -3,6 +3,7 @@ package Cache
 import (
 	"RideMarket-CleanWebApi-GoLang/Config"
 	"context"
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -33,6 +34,30 @@ func InitRedis(cfg *Config.Config, ctx context.Context) error {
 
 func GetRedisInstance() *redis.Client {
 	return redisClient
+}
+
+func Set[T any](redisClient *redis.Client, key string, value T, duration time.Duration) error {
+	v, err := json.Marshal(value)
+	if err != nil {
+		return err
+	}
+	return redisClient.Set(context.Background(), key, v, duration).Err()
+}
+
+func Get[T any](redisClient *redis.Client, key string) (T, error) {
+	var dest T = *new(T)
+
+	v, err := redisClient.Get(context.Background(), key).Result()
+	if err != nil {
+		return dest, err
+	}
+
+	err = json.Unmarshal([]byte(v), &dest)
+	if err != nil {
+		return dest, err
+	}
+
+	return dest, nil
 }
 
 func CloseRedis() {
