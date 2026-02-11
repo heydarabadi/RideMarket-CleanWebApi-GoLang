@@ -40,7 +40,8 @@ Goal: separation of concerns, high testability, framework independence, clear do
 - Go 1.21+
 - PostgreSQL 15+
 - Redis
-- Elk(kibana&elastic&filebeat&prometheus&grafana
+- Elk(Kibana&ElasticSearch&Filebeat)
+- Prometheus & Grafana
 - (optional) Docker & docker-compose
 
 ### Local development
@@ -73,3 +74,4 @@ http://localhost:8080
 Using Docker (recommended)
 docker-compose up -d --build
 ```
+
