@@ -1,5 +1,5 @@
 ﻿Server:
-  Port: 1234
+  Port: 5005
   RunMode: debug
 
 Logger:
@@ -24,8 +24,8 @@ Postgres:
 Redis:
   Host: localhost
   Port: 6379
-  Password: password
   Db: 0
+  Password: password
   PoolSize: 10
   PoolTimeOut: 15
   ReadTimeOut: 5
@@ -40,6 +40,6 @@ Password:
   IncludeUpperCase: true
   IncludeLowerCase: true
 Otp:
-  ExpireTime:120
-  Digits:6
-  Limiter:100
+  ExpireTime: 120
+  Digits: 6
+  Limiter: 100

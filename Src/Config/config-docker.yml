@@ -22,7 +22,7 @@ Postgres:
   ConnMaxLifetime: 30
 
 Redis:
-  Host: redis_container
+  Host: localhost
   Port: 6379
   Db: 0
   Password: password
@@ -40,6 +40,6 @@ Password:
   IncludeUpperCase: true
   IncludeLowerCase: true
 Otp:
-  ExpireTime:120
-  Digits:6
-  Limiter:100
+  ExpireTime: 120
+  Digits: 6
+  Limiter: 100

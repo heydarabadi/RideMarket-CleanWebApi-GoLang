@@ -22,7 +22,7 @@ func InitServer(cfg *Config.Config) {
 	r.Use(gin.Logger(), gin.Recovery())
 	r.Use(Middlewares.DefaultStructuredLogger(cfg))
 
-	RegisterRoute(r)
+	RegisterRoute(r, cfg)
 	err := r.Run(fmt.Sprintf(":%s", cfg.Server.Port))
 	if err != nil {
 		return
@@ -37,12 +37,16 @@ func RegisterValidators() {
 	}
 }
 
-func RegisterRoute(r *gin.Engine) {
+func RegisterRoute(r *gin.Engine, cfg *Config.Config) {
 
 	v1 := r.Group("/api/v1")
 	{
 		health := v1.Group("/health")
 		Routers.Health(health)
+
+		user := v1.Group("/user/register")
+		Routers.SendOtp(user, cfg)
+
 	}
 
 }

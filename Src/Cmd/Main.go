@@ -15,7 +15,7 @@ func main() {
 
 	logger := Log.NewLogger(cfg)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 
 	if err := Cache.InitRedis(cfg, ctx); err != nil {

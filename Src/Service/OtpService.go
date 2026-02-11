@@ -23,7 +23,7 @@ type OtpDto struct {
 	Used  bool
 }
 
-func (service *OtpService) NewOtpService(cfg *Config.Config) *OtpService {
+func NewOtpService(cfg *Config.Config) *OtpService {
 	logger := Log.NewLogger(cfg)
 	redisClient := Cache.GetRedisInstance()
 
@@ -35,9 +35,7 @@ func (service *OtpService) SetOtp(mobileNumber string, otp string) error {
 	val := &OtpDto{Value: otp, Used: false}
 
 	res, err := Cache.Get[OtpDto](service.redis, key)
-	if err != nil {
-		return err
-	} else if err == nil && !res.Used {
+	if err == nil && !res.Used {
 		return &ServiceErrors.ServiceError{EndUserMessage: ServiceErrors.OtpExists}
 	} else if err == nil && res.Used {
 		return &ServiceErrors.ServiceError{EndUserMessage: ServiceErrors.OtpUsed}
@@ -54,13 +52,11 @@ func (service *OtpService) Validate(mobileNumber string, otp string) error {
 	key := fmt.Sprintf("%s:%s", Constants.RedisOtpDefaultKey, mobileNumber)
 
 	res, err := Cache.Get[OtpDto](service.redis, key)
-	if err != nil {
-		return err
+	if err == nil && !res.Used {
+		return &ServiceErrors.ServiceError{EndUserMessage: ServiceErrors.OtpExists}
 	} else if err == nil && res.Used {
 		return &ServiceErrors.ServiceError{EndUserMessage: ServiceErrors.OtpUsed}
-	} else if err == nil && !res.Used && res.Value != otp {
-		return &ServiceErrors.ServiceError{EndUserMessage: ServiceErrors.OtpNotValid}
-	} else if err == nil && !res.Used && res.Value == otp {
+	} else if !res.Used && res.Value == otp {
 		res.Used = true
 		err = Cache.Set(service.redis, key, res.Value, service.cfg.Otp.ExpireTime*time.Second)
 		if err != nil {
