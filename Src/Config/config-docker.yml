@@ -43,3 +43,8 @@ Otp:
   ExpireTime: 120
   Digits: 6
   Limiter: 100
+Jwt:
+  Secret: "My SecretKey"
+  RefreshTokenSecret: "My SecretKey"
+  AccessTokenExpireDuration: 60
+  RefreshTokenExpireDuration: 60
