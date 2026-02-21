@@ -1,0 +1,1 @@
+﻿GOPROXY=http://localhost:8081/repository/go-proxy/;APP_ENV=development;GOSUMDB=off
