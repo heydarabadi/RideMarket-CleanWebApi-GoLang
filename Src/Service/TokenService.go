@@ -18,8 +18,7 @@ type TokenService struct {
 
 type tokenDto struct {
 	UserId       int
-	FirstName    string
-	LastName     string
+	FullName     string
 	UserName     string
 	MobileNumber string
 	Email        string
@@ -42,8 +41,7 @@ func (s *TokenService) GenerateToken(token *tokenDto) (*Dtos.TokenDetail, error)
 
 	accessTokenClaims := jwt.MapClaims{}
 	accessTokenClaims["user_id"] = token.UserId
-	accessTokenClaims["first_name"] = token.FirstName
-	accessTokenClaims["LastName"] = token.LastName
+	accessTokenClaims["fullname"] = token.FullName
 	accessTokenClaims["username"] = token.UserName
 	accessTokenClaims["email"] = token.Email
 	accessTokenClaims["role"] = strings.Join(token.Role, ",")

@@ -14,5 +14,5 @@ type Role struct {
 	Scope       string `gorm:"size:50;index;comment:Optional scope like 'global', 'team', 'project' (for scoped RBAC)"`
 
 	// Many-to-many relationship with Users
-	Users []User `gorm:"many2many:user_roles;constraint:OnUpdate:No ACTION,OnDelete:NO ACTION;"`
+	UserRoles *[]UserRole
 }

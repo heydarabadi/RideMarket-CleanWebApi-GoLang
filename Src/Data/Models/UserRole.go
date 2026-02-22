@@ -1,13 +1,9 @@
 package Models
 
-import "time"
-
 type UserRole struct {
-	UserID uint `gorm:"primaryKey;column:user_id"`
-	RoleID uint `gorm:"primaryKey;column:role_id"`
-
-	AssignedAt   time.Time  `gorm:"not null;default:CURRENT_TIMESTAMP"`
-	AssignedByID uint       `gorm:"index"`
-	IsActive     bool       `gorm:"default:true"`
-	ExpiresAt    *time.Time `gorm:"default:null"`
+	BaseModel
+	User   User  `gorm:"foreignKey:UserId;constraint:OnUpdate:NO ACTION;OnDelete:NO ACTION"`
+	Role   *Role `gorm:"foreignKey:RoleId;constraint:OnUpdate:NO ACTION;OnDelete:NO ACTION"`
+	UserId int
+	RoleId int
 }

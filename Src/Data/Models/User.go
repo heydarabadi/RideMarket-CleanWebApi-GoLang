@@ -22,5 +22,5 @@ type User struct {
 	LockedUntil         *time.Time `gorm:"comment:Timestamp until which the account is locked (after too many failed attempts)"`
 
 	// Many-to-many relationship with Roles (RBAC)
-	Roles []Role `gorm:"many2many:user_roles;constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
+	UserRoles *[]UserRole
 }

@@ -4,7 +4,6 @@ import (
 	"RideMarket-CleanWebApi-GoLang/Data/Models"
 	"fmt"
 	"log"
-	"time"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -110,12 +109,8 @@ func seedAdminUser(db *gorm.DB) {
 
 	if adminRole.ID != 0 {
 		userRole := Models.UserRole{
-			UserID:       admin.ID,
-			RoleID:       adminRole.ID,
-			AssignedAt:   time.Now(),
-			AssignedByID: 0, // 0 = system
-			IsActive:     true,
-			ExpiresAt:    nil,
+			UserId: int(admin.ID),
+			RoleId: int(adminRole.ID),
 		}
 
 		// Upsert to prevent duplicate entries
