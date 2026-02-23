@@ -12,12 +12,13 @@ type BaseHttpResponse struct {
 	ValidationErrors *[]Validations.ValidationError `json:"ValidationErrors"`
 }
 
-func GenerateHttpResponse(result any, success bool, resultCode int) *BaseHttpResponse {
+func GenerateBaseHttpResponse(result any, success bool, resultCode int) *BaseHttpResponse {
 	return &BaseHttpResponse{Result: result,
 		Success:    success,
 		ResultCode: resultCode,
 	}
 }
+
 func GenerateHttpResponseWithError(result any, success bool, resultCode int, err error) *BaseHttpResponse {
 	return &BaseHttpResponse{Result: result,
 		Success:    success,
@@ -31,6 +32,22 @@ func GenerateHttpResponseWithValidationError(result any, success bool, resultCod
 		Success:          success,
 		ResultCode:       resultCode,
 		Error:            err.Error(),
+		ValidationErrors: Validations.GetValidationErrors(err),
+	}
+}
+
+func GenerateBaseResponseWithAnyError(result any, success bool, resultCode int, err any) *BaseHttpResponse {
+	return &BaseHttpResponse{Result: result,
+		Success:    success,
+		ResultCode: resultCode,
+		Error:      err,
+	}
+}
+
+func GenerateBaseResponseWithValidationError(result any, success bool, resultCode int, err error) *BaseHttpResponse {
+	return &BaseHttpResponse{Result: result,
+		Success:          success,
+		ResultCode:       resultCode,
 		ValidationErrors: Validations.GetValidationErrors(err),
 	}
 }

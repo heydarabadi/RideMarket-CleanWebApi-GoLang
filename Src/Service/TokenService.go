@@ -40,13 +40,13 @@ func (s *TokenService) GenerateToken(token *tokenDto) (*Dtos.TokenDetail, error)
 	tokenDetail.RefreshTokenExpireTime = expireTimeRefreshToken.Unix()
 
 	accessTokenClaims := jwt.MapClaims{}
-	accessTokenClaims["user_id"] = token.UserId
+	accessTokenClaims["userid"] = token.UserId
 	accessTokenClaims["fullname"] = token.FullName
 	accessTokenClaims["username"] = token.UserName
 	accessTokenClaims["email"] = token.Email
 	accessTokenClaims["role"] = strings.Join(token.Role, ",")
 	accessTokenClaims["exp"] = tokenDetail.AccessTokenExpireTime
-	accessTokenClaims["mobile_number"] = token.MobileNumber
+	accessTokenClaims["mobilenumber"] = token.MobileNumber
 
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, accessTokenClaims)
 

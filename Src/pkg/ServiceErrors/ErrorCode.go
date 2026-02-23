@@ -13,3 +13,9 @@ const ClaimNotFound = "Claim Not Found"
 const EmailExists = "Email Exists"
 const UserNameExists = "UserName Exists"
 const MobileNumberExists = "Mobile Number Exists"
+
+// Auth
+const TokenRequired string = "Token Required"
+const TokenExpired string = "Token Expired"
+
+const TokenInvalid string = "Token Invalid"

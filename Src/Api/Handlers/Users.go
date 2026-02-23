@@ -35,7 +35,7 @@ func (h *UserHandler) SendOtp(c *gin.Context) {
 	}
 
 	// Call Internal Sms Service
-	c.JSON(http.StatusCreated, Helper.GenerateHttpResponse(nil, true, 0))
+	c.JSON(http.StatusCreated, Helper.GenerateBaseHttpResponse(nil, true, 0))
 }
 
 func (h *UserHandler) RegisterLoginByMobileNumber(c *gin.Context) {
@@ -52,7 +52,7 @@ func (h *UserHandler) RegisterLoginByMobileNumber(c *gin.Context) {
 			Helper.GenerateHttpResponseWithError(nil, false, -1, err))
 		return
 	}
-	c.JSON(http.StatusCreated, Helper.GenerateHttpResponse(token, true, 0))
+	c.JSON(http.StatusCreated, Helper.GenerateBaseHttpResponse(token, true, 0))
 }
 
 func (h *UserHandler) RegisterByUserName(c *gin.Context) {
@@ -69,7 +69,7 @@ func (h *UserHandler) RegisterByUserName(c *gin.Context) {
 			Helper.GenerateHttpResponseWithError(nil, false, -1, err))
 		return
 	}
-	c.JSON(http.StatusCreated, Helper.GenerateHttpResponse(true, true, 0))
+	c.JSON(http.StatusCreated, Helper.GenerateBaseHttpResponse(true, true, 0))
 }
 
 func (h *UserHandler) LoginByUserName(c *gin.Context) {
@@ -86,5 +86,5 @@ func (h *UserHandler) LoginByUserName(c *gin.Context) {
 			Helper.GenerateHttpResponseWithError(nil, false, -1, err))
 		return
 	}
-	c.JSON(http.StatusCreated, Helper.GenerateHttpResponse(token, true, 0))
+	c.JSON(http.StatusCreated, Helper.GenerateBaseHttpResponse(token, true, 0))
 }
