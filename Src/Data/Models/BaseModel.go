@@ -10,9 +10,9 @@ import (
 type BaseModel struct {
 	ID uint `gorm:"primaryKey;autoIncrement"`
 
-	CreatedAt time.Time      `gorm:"autoCreateTime"`
-	UpdatedAt time.Time      `gorm:"autoUpdateTime"`
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	CreatedAt time.Time `gorm:"autoCreateTime"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime"`
+	DeletedAt time.Time `gorm:"index"`
 
 	CreatedBy uint          `gorm:"not null;default:0"`
 	UpdatedBy sql.NullInt64 `gorm:"default:null"`

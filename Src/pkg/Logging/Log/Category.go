@@ -26,6 +26,7 @@ const (
 	Delete    SubCategory = "Delete"
 	Insert    SubCategory = "Insert"
 	Migration SubCategory = "Migration"
+	Commit    SubCategory = "Commit"
 
 	// Internal
 	Api                 SubCategory = "Api"

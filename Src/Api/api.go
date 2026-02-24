@@ -5,6 +5,7 @@ import (
 	"RideMarket-CleanWebApi-GoLang/Api/Routers"
 	"RideMarket-CleanWebApi-GoLang/Api/Validations"
 	"RideMarket-CleanWebApi-GoLang/Config"
+	"RideMarket-CleanWebApi-GoLang/Constants"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -32,8 +33,14 @@ func InitServer(cfg *Config.Config) {
 func RegisterValidators() {
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
-		val.RegisterValidation("mobile", Validations.IranianMobileNumberValidator, true)
-		val.RegisterValidation("password", Validations.PasswordValidator, true)
+		err := val.RegisterValidation("mobile", Validations.IranianMobileNumberValidator, true)
+		if err != nil {
+			return
+		}
+		err := val.RegisterValidation("password", Validations.PasswordValidator, true)
+		if err != nil {
+			return
+		}
 	}
 }
 
@@ -46,6 +53,9 @@ func RegisterRoute(r *gin.Engine, cfg *Config.Config) {
 
 		user := v1.Group("/user/register")
 		Routers.SendOtp(user, cfg)
+
+		countries := v1.Group("/countries", Middlewares.Authentication(cfg), Middlewares.Authorization([]string{Constants.AdminRoleName}))
+		Routers.Country(countries, cfg)
 
 	}
 

@@ -19,3 +19,6 @@ const TokenRequired string = "Token Required"
 const TokenExpired string = "Token Expired"
 
 const TokenInvalid string = "Token Invalid"
+
+// Db
+const RecordNotFound string = "Record Not Found"
