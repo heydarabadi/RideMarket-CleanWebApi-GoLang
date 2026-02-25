@@ -25,6 +25,9 @@ func NewCountryService(cfg *Config.Config) *CountryService {
 		base: &BaseService[Models.Country, Dtos.CreateUpdateCountryRequest, Dtos.CreateUpdateCountryRequest, Dtos.CountryResponse]{
 			Database: DatabaseConfig.GetDb(),
 			Logger:   Log.NewLogger(cfg),
+			PreLoads: []preload{
+				{string: "Cities"},
+			},
 		},
 		logger: Log.NewLogger(cfg)}
 
@@ -129,4 +132,8 @@ func (s *CountryService) GetById(ctx context.Context, id int) (*Dtos.CountryResp
 
 	return &Dtos.CountryResponse{Id: int(response.ID), Name: response.Name}, nil
 
+}
+
+func (s *CountryService) GetByFilter(ctx context.Context, req *Dtos.PaginationInputWithFilter) (*Dtos.PagedList[Dtos.CountryResponse], error) {
+	return s.base.GetByFilter(ctx, req)
 }

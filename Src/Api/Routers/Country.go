@@ -13,5 +13,6 @@ func Country(r *gin.RouterGroup, cfg *Config.Config) {
 	r.PUT("/:id", h.Update)
 	r.DELETE("/:id", h.Delete)
 	r.GET("/:id", h.GetById)
+	r.POST("/get-by-filter", h.GetByFilter)
 
 }
