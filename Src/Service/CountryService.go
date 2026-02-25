@@ -17,10 +17,15 @@ import (
 type CountryService struct {
 	database *gorm.DB
 	logger   Log.ILogger
+	base     *BaseService[Models.Country, Dtos.CreateUpdateCountryRequest, Dtos.CreateUpdateCountryRequest, Dtos.CountryResponse]
 }
 
 func NewCountryService(cfg *Config.Config) *CountryService {
 	return &CountryService{database: DatabaseConfig.GetDb(),
+		base: &BaseService[Models.Country, Dtos.CreateUpdateCountryRequest, Dtos.CreateUpdateCountryRequest, Dtos.CountryResponse]{
+			Database: DatabaseConfig.GetDb(),
+			Logger:   Log.NewLogger(cfg),
+		},
 		logger: Log.NewLogger(cfg)}
 
 }
